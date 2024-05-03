@@ -4,6 +4,7 @@ import torch
 from diffusers import StableDiffusionXLPipeline, AutoencoderKL
 
 from utils_blora import BLOCKS, filter_lora, scale_lora
+from pathlib import Path
 
 
 def parse_args():
@@ -15,13 +16,7 @@ def parse_args():
         "--output_path", type=str, required=True, help="path to save the images"
     )
     parser.add_argument(
-        "--content_B_LoRA", type=str, default=None, help="path for the content B-LoRA"
-    )
-    parser.add_argument(
         "--style_B_LoRA", type=str, default=None, help="path for the style B-LoRA"
-    )
-    parser.add_argument(
-        "--content_alpha", type=float, default=1., help="alpha parameter to scale the content B-LoRA weights"
     )
     parser.add_argument(
         "--style_alpha", type=float, default=1., help="alpha parameter to scale the style B-LoRA weights"
@@ -39,15 +34,6 @@ if __name__ == '__main__':
                                                          vae=vae,
                                                          torch_dtype=torch.float16).to("cuda")
 
-    # Get Content B-LoRA SD
-    if args.content_B_LoRA is not None:
-        content_B_LoRA_sd, _ = pipeline.lora_state_dict(args.content_B_LoRA)
-        content_B_LoRA = filter_lora(content_B_LoRA_sd, BLOCKS['content'])
-        content_B_LoRA = scale_lora(content_B_LoRA, args.content_alpha)
-    else:
-        content_B_LoRA = {}
-
-    # Get Style B-LoRA SD
     if args.style_B_LoRA is not None:
         style_B_LoRA_sd, _ = pipeline.lora_state_dict(args.style_B_LoRA)
         style_B_LoRA = filter_lora(style_B_LoRA_sd, BLOCKS['style'])
@@ -55,15 +41,10 @@ if __name__ == '__main__':
     else:
         style_B_LoRA = {}
 
-    # Merge B-LoRAs SD
-    res_lora = {**content_B_LoRA, **style_B_LoRA}
-
-    # Load
-    pipeline.load_lora_into_unet(res_lora, None, pipeline.unet)
-
-    # Generate
+    pipeline.load_lora_into_unet(style_B_LoRA, None, pipeline.unet)
     images = pipeline(args.prompt, num_images_per_prompt=args.num_images_per_prompt).images
 
-    # Save
+    Path(args.output_path).mkdir(exist_ok=True, parents=True)
+
     for i, img in enumerate(images):
         img.save(f'{args.output_path}/{args.prompt}_{i}.jpg')

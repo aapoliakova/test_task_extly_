@@ -6,13 +6,13 @@ adapters to preserve style of the image or an instance.
 The training script with all arguments: 
 
 ```
- accelerate launch train_dreambooth_b-lora_sdxl.py \
+accelerate launch train_dreambooth_b-lora_sdxl.py \
  --pretrained_model_name_or_path="stabilityai/stable-diffusion-xl-base-1.0" \
- --dataset_name="aapoliakova/style_v143" \
- --output_dir="output_dir_blora" \
+ --dataset_name="dataset_name" \
+ --output_dir="output_dir" \
  --instance_prompt="v[43]" \
- --resolution=512 \
- --rank=32 \
+ --resolution=1024 \
+ --rank=64 \
  --train_batch_size=1 \
  --learning_rate=5e-5 \
  --lr_scheduler="constant" \
@@ -23,7 +23,21 @@ The training script with all arguments:
  --gradient_checkpointing \
  --mixed_precision="fp16"
 ```
+I fine-tuned the model with default parameters as recommended by the authors, I encoded the needed style with rare token v43. 
 
-As you can see I trained model for 1000 steps with learning rate 5e-5. An style token is v43. 
-I have chosen image resolution 512 and LoRa rank 32 to fit model into memory. 
+To run inference, execute the following steps in a new virtual environment:
+```
+https://github.com/aapoliakova/test_task_extly_.git
+cd test_task_extly_
+```
 
+```
+pip install -r requirements.txt
+```
+
+```
+python inference.py --prompt="promt" \
+    --style_B_LoRA="aapoliakova/exctly_test_style" \
+    --output_path="images" \
+    --num_images_per_prompt=4
+```
