@@ -1,0 +1,3 @@
+torch
+accelerate
+git+https://github.com/huggingface/diffusers
