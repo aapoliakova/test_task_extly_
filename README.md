@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 
 ```
-python inference.py --prompt="promt" \
+python inference.py --prompt="A girl in [v34] style" \
     --style_B_LoRA="aapoliakova/exctly_test_style" \
     --output_path="images" \
     --num_images_per_prompt=4
