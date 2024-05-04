@@ -27,7 +27,7 @@ I fine-tuned the model with default parameters as recommended by the authors, I 
 
 To run inference, execute the following steps in a new virtual environment:
 ```
-https://github.com/aapoliakova/test_task_extly_.git
+git clone https://github.com/aapoliakova/test_task_extly_.git
 cd test_task_extly_
 ```
 
