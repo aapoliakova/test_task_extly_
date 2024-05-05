@@ -50,7 +50,7 @@ accelerate launch train_dreambooth_b-lora_sdxl.py \
 ```
 
 ## DreamBooth
-I also finetuned SDXL DreamBooth LoRa for 500 steps with lr 1e-4 and batch size 4. I trained model with prior preservation loss.
+I finetuned SDXL DreamBooth LoRa for 500 steps with lr 1e-4 and batch size 4. I trained model with prior preservation loss.
 To create class images I specified the class prompt as "person portrait" and instance prompt "in v[34] style". 
 To run inference run the following code: 
 ```
@@ -61,13 +61,8 @@ python inference.py --prompt="A girl in [v34] style" \
 ```
 
 
-In case you need more details on finetuning 
-I also provided two code snippets for training with all configuration. 
+I also provided code snippets for training with all configuration. 
 
-
-
-
-DreamBooth LoRA
 ```
 accelerate launch train_dreambooth_lora_sdxl.py \
   --pretrained_model_name_or_path="stabilityai/stable-diffusion-xl-base-1.0"  \
@@ -89,3 +84,4 @@ accelerate launch train_dreambooth_lora_sdxl.py \
   --seed="0"
 ```
 
+![DreamBooth](https://github.com/aapoliakova/test_task_extly_/blob/master/dreambooth_images/dream_booth.jpg)
