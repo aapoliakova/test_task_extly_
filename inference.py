@@ -24,7 +24,6 @@ def parse_args():
     parser.add_argument(
         "--use_blora",
         default=False,
-        required=True,
         action="store_true",
         help="Flag to use B-LoRA",
     )
