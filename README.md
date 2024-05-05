@@ -24,9 +24,9 @@ To run inference you can use LoRA weights loaded on HF or specify the path to ch
 To replicate the style v34 rare token must be used, please see prompt example below.
 ```
 python inference.py --prompt="A girl in [v34] style" \
-    --style_LoRA="aapoliakova/v34_style_blora" \
-    --output_path="images" \
-    --num_images_per_prompt=4
+                    --style_LoRA="aapoliakova/v34_style_blora" \
+                    --output_path="images" \
+                    --num_images_per_prompt=4
 ```
 I also provided code snippet where you can find more configuration details. 
 ```
@@ -54,9 +54,9 @@ To create class images I specified the class prompt as "person portrait" and ins
 To run inference run the following code: 
 ```
 python inference.py --prompt="A girl in [v34] style" \
-    --style_LoRA="aapoliakova/v34_style_dreambooth" \
-    --output_path="images" \
-    --num_images_per_prompt=4
+                    --style_LoRA="aapoliakova/v34_style_dreambooth" \
+                    --output_path="images" \
+                    --num_images_per_prompt=4
 ```
 
 
