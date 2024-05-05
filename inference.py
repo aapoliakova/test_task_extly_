@@ -21,6 +21,13 @@ def parse_args():
     parser.add_argument(
         "--style_LoRA", type=str, default=None, help="path for the style B-LoRA or Dreambooth"
     )
+    parser.add_argument(
+        "--use_blora",
+        default=False,
+        required=True,
+        action="store_true",
+        help="Flag to use B-LoRA",
+    )
     return parser.parse_args()
 
 
@@ -31,7 +38,7 @@ if __name__ == '__main__':
                                                          vae=vae,
                                                          torch_dtype=torch.float16).to("cuda")
 
-    if args.style_B_LoRA is not None:
+    if args.use_blora:
         style_B_LoRA_sd, _ = pipeline.lora_state_dict(args.style_LoRA)
         style_B_LoRA = filter_lora(style_B_LoRA_sd, BLOCKS['style'])
         style_B_LoRA = scale_lora(style_B_LoRA, 1.0)
