@@ -27,6 +27,7 @@ Make sure you have a GPU device.
 ```
 python inference.py --prompt="A girl in [v34] style" \
                     --style_LoRA="aapoliakova/v34_style_blora" \
+                    --use_blora \
                     --output_path="images" \
                     --num_images_per_prompt=4
 ```
