@@ -25,7 +25,7 @@ def parse_args():
         "--use_blora",
         default=False,
         action="store_true",
-        help="Flag to use B-LoRA",
+        help="Flag to use B-LoRA instead of dreambooth",
     )
     return parser.parse_args()
 
