@@ -23,6 +23,7 @@ I've also made experiment with lower resolution (512 instead of 1024) and 32 LoR
 
 To run inference you can use LoRA weights loaded on HF or specify the path to checkpoint. 
 To replicate the style v34 rare token must be used, please see prompt example below.
+Make sure you have a GPU device.
 ```
 python inference.py --prompt="A girl in [v34] style" \
                     --style_LoRA="aapoliakova/v34_style_blora" \
