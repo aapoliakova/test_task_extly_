@@ -3,6 +3,7 @@ To solve this task I compared 2 methods:
 2. [DreamBooth](https://arxiv.org/abs/2208.12242) with LoRA. This approach proved yourself as highly effective for context/style transfer, but might require more images for consistent image generation in a new style.   
 The results are stored in the folders b-lora images and dreambooth_images respectively. 
 
+In my opinion dreambooth outperforms B-LoRA as this model can produce more colorful images compared to B-LoRA, whereas both models are able to reproduce the main style pattern.  
 
 To run inference, execute the following steps in a new virtual environment:
 ```
@@ -87,3 +88,4 @@ accelerate launch train_dreambooth_lora_sdxl.py \
   --class_prompt="person portrait" \
   --seed="0"
 ```
+
